@@ -18,22 +18,41 @@
       </a>
     </li>
     <!-- Forms & Tables -->
-    <li class="menu-header small text-uppercase"><span class="menu-header-text">Books</span></li>
+    <li class="menu-header small text-uppercase"><span class="menu-header-text">books</span></li>
     <!-- Forms -->
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-detail"></i>
-        <div data-i18n="Books">Books</div>
+        <div data-i18n="books">Buku</div>
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="books.php" class="menu-link">
-            <div data-i18n="Basic Inputs">Books Baru</div>
+          <a href="tambah_buku.php" class="menu-link">
+            <div data-i18n="Basic Inputs">Tambah Buku</div>
           </a>
         </li>
         <li class="menu-item">
-          <a href="aktivitas.php" class="menu-link">
-            <div data-i18n="Input groups">aktivitas</div>
+          <a href="buku.php" class="menu-link">
+            <div data-i18n="Input groups">Daftar Buku</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-detail"></i>
+        <div data-i18n="books">Anggota</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="tambah_anggota.php" class="menu-link">
+            <div data-i18n="Basic Inputs">Tambah Anggota</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="anggota.php" class="menu-link">
+            <div data-i18n="Input groups">Daftar Anggota</div>
           </a>
         </li>
       </ul>

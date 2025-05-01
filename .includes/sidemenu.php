@@ -18,8 +18,15 @@
       </a>
     </li>
     <!-- Forms & Tables -->
+    <li class="menu-item">
+      <a href="peminjaman.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <div data-i18n="Analytics">Peminjaman</div>
+      </a>
+    </li>
     <li class="menu-header small text-uppercase"><span class="menu-header-text">books</span></li>
     <!-- Forms -->
+
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-detail"></i>

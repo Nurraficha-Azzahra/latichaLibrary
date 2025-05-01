@@ -1,105 +1,189 @@
+<?php
+// index.php
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LatichaLibrary - Sistem Peminjaman Buku</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-        header {
-            background: linear-gradient(135deg, #4b6cb7, #182848);
-            color: white;
-            text-align: center;
-            padding: 50px 20px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            text-align: center;
-        }
-        .features {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-        .feature-box {
-            background: #4b6cb7;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 30%;
-            font-size: 1.2em;
-        }
-        .feature-box i {
-            font-size: 2em;
-        }
-        .cta {
-            margin-top: 30px;
-        }
-        .btn {
-            background: #182848;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
-        .btn:hover {
-            background: #4b6cb7;
-        }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: #182848;
-            color: white;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LatichaLibrary - Peminjaman Buku Online</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    /* Navbar */
+    .navbar {
+      background: rgba(70, 105, 187, 0.85);
+    }
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    /* Hero Section */
+    .hero {
+      background: url('assets/library-bg.jpg') no-repeat center center/cover;
+      min-height: 95dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      margin-top: 20px;
+    }
+    .hero .btn {
+      margin-top: 30px;
+      padding: 10px 30px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      background-color:rgb(229, 161, 165);
+      color: #000;
+      border: none;
+    }
+    .hero .btn:hover {
+      background-color:rgb(185, 70, 97);
+      color: #000;
+    }
+    /* Content Sections */
+    .content-section {
+      padding: 60px 20px;
+      background-color: #fff;
+    }
+    .content-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .content-section p {
+      font-size: 1.2rem;
+    }
+    /* Features Section */
+    .features .feature-box {
+      background: #4b6cb7;
+      color: #fff;
+      padding: 30px 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+    .features .feature-box:hover {
+      transform: translateY(-5px);
+    }
+    .features .feature-box img {
+      width: 64px;
+      height: 64px;
+    }
+    .features .feature-box h4 {
+      margin-top: 15px;
+      font-size: 1.5rem;
+    }
+    /* Footer */
+    .footer {
+      background-color : #696cff;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>Selamat Datang di LatichaLibrary</h1>
-    <p>Sistem Peminjaman dan Pengembalian Buku Online</p>
-</header>
+<?php
+  include "navbar.php"
+?>
 
-<div class="container">
-    <h2>Tentang LatichaLibrary</h2>
-    <p>LatichaLibrary adalah platform digital yang dirancang untuk memudahkan proses peminjaman dan pengembalian buku secara online. Dengan sistem ini, pengguna dapat dengan mudah mengakses informasi mengenai buku yang tersedia, melakukan peminjaman, dan mengembalikan buku tanpa harus datang ke perpustakaan.</p>
+<!-- HERO SECTION -->
+<section class="hero">
+  <h1 style="font-size : 4rem; font-weight : bold; color : #696cff;">Selamat Datang di LatichaLibrary</h1>
+  <p style="font-size : 1.5rem;">Pinjam mudah, baca puas, kembali tepat!</p>
+  <a href="search.php" style="background-color :  #696cff !important; color : white; " class="btn">Cari buku favoritmu </a>
 
-    <div class="features">
-        <div class="feature-box">
-            📚 <br> Peminjaman Buku Mudah
+  <div style="position : absolute ; bottom : 7rem; display : flex; gap : 1rem;">
+    <a href="#about">
+      <img src="../assets/img/icons/info-purple.png" style="width : 2rem;" alt="">
+    </a>
+
+   <h3 style="color :  #696cff;">Scroll untuk info lainnya </h3>
+
+    <a href="#about">
+      <img src="../assets/img/icons/info-purple.png" style="width : 2rem;" alt="">
+    </a>
+  </div>
+
+  <!-- <div style="position : absolute ; bottom : 1rem;">
+    <h3>More info</h3>
+  </div> -->
+
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="content-section" style="padding-top : 10rem;">
+  <div class="container text-center">
+    <h2 style="color : #696cff !important; font-weight : bold;">Tentang Kami</h2>
+    <p>LatichaLibrary adalah platform inovatif yang memudahkan proses peminjaman dan pengembalian buku secara online. Nikmati kemudahan mengakses koleksi buku dan kelola transaksi dengan sistem yang sederhana, aman, dan cepat.</p>
+  </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section id="features" class="content-section bg-white">
+  <div class="container text-center">
+    <h2 style="color : #696cff !important; font-weight : bold;">Fitur Unggulan</h2>
+    <div class="row features mt-4">
+      <a class="col-md-4 mb-4" href="search.php">
+      <div class="feature-box p-4">
+          <img src="https://img.icons8.com/fluency/96/ffffff/book.png" alt="Peminjaman Buku">
+          <h4 class="mt-3">Peminjaman Buku Online</h4>
+          <p>Proses peminjaman yang cepat tanpa harus antri.</p>
         </div>
-        <div class="feature-box">
-            🔄 <br> Pengembalian Cepat
+      </a>
+      <a class="col-md-4 mb-4" href="daftar_peminjaman.php">
+        <div class="feature-box p-4">
+          <img src="https://img.icons8.com/color/96/ffffff/return-book.png" alt="Pengembalian Buku">
+          <h4 class="mt-3">Pengembalian Buku Cepat</h4>
+          <p>Sistem pengembalian yang efisien dan real-time.</p>
         </div>
-        <div class="feature-box">
-            📖 <br> Tanpa Antrian
+      </a>
+      <a class="col-md-4 mb-4" href="search.php">
+        <div class="feature-box p-4">
+          <img src="https://img.icons8.com/fluency/96/ffffff/search.png" alt="Pencarian Buku">
+          <h4 class="mt-3">Pencarian Buku Cepat</h4>
+          <p>Temukan buku favoritmu dengan fitur pencarian yang intuitif.</p>
         </div>
+      </a>
     </div>
+  </div>
+</section>
 
-    <div class="cta">
-        <a href="Location: ./auth/login.php;" class="btn">Mulai Sekarang</a>
-    </div>
-</div>
+<!-- CONTACT SECTION -->
+<section id="contact" class="content-section">
+  <div class="container text-center">
+    <h2 style="color : #696cff !important; font-weight : bold;">Kontak kami</h2>
+    <p>Untuk informasi lebih lanjut, hubungi saja kami karena kebetulan kami masi pengangguran</p>
+     <p> - email: info@latichalibrary.com </p>  
+     <p> - telepon: (+62) 82124134714</p> 
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 TIM LATICHA RPL SMKN 4 Tanjungpinang</p>
+  </div>
+</footer>
 
-<div class="footer">
-    <p>&copy; 2025 LatichaLibrary | Sistem Peminjaman Buku Online</p>
-</div>
-
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

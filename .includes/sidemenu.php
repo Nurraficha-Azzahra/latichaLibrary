@@ -18,11 +18,16 @@
       </a>
     </li>
     <!-- Forms & Tables -->
+<<<<<<< HEAD
     <li class="menu-header small text-uppercase"><span class="menu-header-text">books</span></li>
+=======
+    <li class="menu-header small text-uppercase"><span class="menu-header-text">Books</span></li>
+>>>>>>> cd4a27b088c3320032f78a13f08f6ac88a949227
     <!-- Forms -->
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-detail"></i>
+<<<<<<< HEAD
         <div data-i18n="books">Buku</div>
       </a>
       <ul class="menu-sub">
@@ -53,10 +58,27 @@
         <li class="menu-item">
           <a href="anggota.php" class="menu-link">
             <div data-i18n="Input groups">Daftar Anggota</div>
+=======
+        <div data-i18n="Books">Books</div>
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="books.php" class="menu-link">
+            <div data-i18n="Basic Inputs">Books Baru</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="aktivitas.php" class="menu-link">
+            <div data-i18n="Input groups">aktivitas</div>
+>>>>>>> cd4a27b088c3320032f78a13f08f6ac88a949227
           </a>
         </li>
       </ul>
     </li>
   </ul>
 </aside>
+<<<<<<< HEAD
 <!-- / Menu -->
+=======
+<!-- / Menu -->
+>>>>>>> cd4a27b088c3320032f78a13f08f6ac88a949227

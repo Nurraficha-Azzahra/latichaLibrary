@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $namaLengkap = $_POST["namaLengkap"];
     $password = $_POST["password"];
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+<<<<<<< HEAD
     try {
       // Periksa apakah email sudah terdaftar
       $checkEmailQuery = "SELECT * FROM admin WHERE email='$email";
@@ -29,6 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header('Location: register.php');
     exit();
     }
+=======
+
+>>>>>>> cd4a27b088c3320032f78a13f08f6ac88a949227
     $sql = "INSERT INTO anggota (email, namaLengkap, password)
     VALUES ('$email', '$namaLengkap', '$hashedPassword')";
     if ($conn->query($sql) === TRUE) {

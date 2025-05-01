@@ -12,11 +12,19 @@
     <!-- /Logo -->
     <form action="register_process.php" class="mb-3" method="POST">
       <div class="mb-3">
+<<<<<<< HEAD
         <label for="email" class="form-label">email</label>
         <input type="text" class="form-control" name="email" placeholder="Masukkan Email" autofocus/>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">namaLengkap</label>
+=======
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" name="email" placeholder="Masukkan Email" autofocus/>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">NamaLengkap</label>
+>>>>>>> cd4a27b088c3320032f78a13f08f6ac88a949227
         <input type="text" class="form-control" name="namaLengkap" placeholder="Masukkan NamaLengkap" />
       </div>
       <div class="mb-3 form-password-toggle">
@@ -27,10 +35,17 @@
           <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
         </div>
       </div>
+<<<<<<< HEAD
       <button class="btn btn-primary d-grid w-100"> Daftar </button>
     </form>
     <p class="text-center">
       <span> Sudah memiliki akun? </span><a href="login.php"><span> Masuk </span></a>
+=======
+      <button class="btn btn-primary d-grid w-100">Daftar</button>
+    </form>
+    <p class="text-center">
+      <span>Sudah memiliki akun?</span><a href="login.php"><span> Masuk</span></a>
+>>>>>>> cd4a27b088c3320032f78a13f08f6ac88a949227
     </p>
   </div>
 </div>

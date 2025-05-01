@@ -12,7 +12,7 @@
     <h4 class="mb-2">Welcome in LatichaLibrary📚</h4>
     <form class="mb-3" action="login_auth.php" method="POST">
       <div class="mb-3">
-        <label class="form-label">email</label>
+        <label class="form-label">Email</label>
         <input type="text" class="form-control" name="email"
           placeholder="Enter your email" autofocus required />
       </div>

@@ -12,11 +12,11 @@
     <!-- /Logo -->
     <form action="register_process.php" class="mb-3" method="POST">
       <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
+        <label for="email" class="form-label">email</label>
         <input type="text" class="form-control" name="email" placeholder="Masukkan Email" autofocus/>
       </div>
       <div class="mb-3">
-        <label for="email" class="form-label">NamaLengkap</label>
+        <label for="email" class="form-label">namaLengkap</label>
         <input type="text" class="form-control" name="namaLengkap" placeholder="Masukkan NamaLengkap" />
       </div>
       <div class="mb-3 form-password-toggle">

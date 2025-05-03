@@ -33,10 +33,10 @@ include '.includes/toast_notification.php';
                             <?php
                                 $index = 1; // Variabel untuk nomor urut
                                 /* Query untuk mengambil data dari tabel buku, anggota, dan peminjaman */
-                                $query = "SELECT buku.*, anggota.anggota_id, anggota.namaLengkap,
-                                peminjaman.peminjaman_id, peminjaman.tgl_peminjaman, peminjaman.tgl_kembali FROM peminjaman
-                                INNER JOIN buku ON peminjaman.buku_id = buku.buku_id
+                                $query = "SELECT peminjaman.*, anggota.anggota_id, anggota.namaLengkap,
+                                peminjaman.peminjaman_id FROM peminjaman
                                 INNER JOIN anggota ON peminjaman.anggota_id = anggota.anggota_id
+                                INNER JOIN buku ON peminjaman.buku_id = buku.id_buku
                                 WHERE peminjaman.anggota_id = " . ($_SESSION["anggota_id"] ??"");
                                 // Eksekusi query
                                 $exec = mysqli_query($conn, $query);
@@ -52,42 +52,42 @@ include '.includes/toast_notification.php';
                                     <td><?= $row['tgl_peminjaman']; ?></td>
                                     <td><?= $row['tgl_kembali']; ?></td>
                                     <td>
-                                    <div class="dropdown">
-                                        <!-- Tombol dropdown untuk Pilihan -->
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <!-- Menu dropdown -->
-                                        <div class="dropdown-menu">
-                                            <!-- Pilihan Edit -->
-                                            <a href="edit_buku.php?buku_id=<?= $buku['buku_id']; ?>" class="dropdown-item">
-                                                <i class="bx bx-edit-alt me-2"></i> Edit
-                                            </a>
-                                            <!-- Pilihan Delete -->
-                                            <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteBook_<?= $buku['buku_id']; ?>">
-                                                <i class="bx bx-trash me-2"></i> Delete
+                                        <div class="dropdown">
+                                            <!-- Tombol dropdown untuk Pilihan -->
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <!-- Menu dropdown -->
+                                            <div class="dropdown-menu">
+                                                <!-- Pilihan Edit -->
+                                                <a href="edit_books.php?books_id=<?= $books['id_books']; ?>" class="dropdown-item">
+                                                    <i class="bx bx-edit-alt me-2"></i> Edit
+                                                </a>
+                                                <!-- Pilihan Delete -->
+                                                <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deletebooks_<?= $bookst['id_books']; ?>">
+                                                    <i class="bx bx-trash me-2"></i> Delete
                                                 </a>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-                                <!-- Modal untuk Hapus Buku -->
-                                <div class="modal fade" id="deleteBook_<?= $buku['buku_id']; ?>" tabindex="-1" aria-hidden="true">
+                                <!-- Modal untuk Hapus Konten Blog -->
+                                <div class="modal fade" id="deletebooks_<?= $books['id_books']; ?>" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Hapus Buku?</h5>
+                                                <h5 class="modal-title">Hapus books?</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="proses_hapus_buku.php" method="POST">
+                                                <form action="proses_books.php" method="books">
                                                     <div>
                                                         <p>Tindakan ini tidak bisa dibatalkan.</p>
-                                                        <input type="hidden" name="bukuID" value="<?= $buku['buku_id']; ?>">
+                                                        <input type="hidden" name="booksID" value="<?= $books['id_books']; ?>">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                                                        <button type="submit" name="delete" class="btn btn-danger">Hapus</button>
+                                                        <button type="submit" name="delete" class="btn btn-primary">Hapus</button>
                                                     </div>
                                                 </form>
                                             </div>

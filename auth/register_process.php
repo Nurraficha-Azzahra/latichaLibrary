@@ -1,5 +1,6 @@
 <?php
 require_once("../config.php");
+
 // Mulai session
 session_start();
 
@@ -21,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           header('Location: register.php');
           exit();
       }
+      
   } catch (Exception $e) {
       $_SESSION['notification'] = [
           'type' => 'danger',

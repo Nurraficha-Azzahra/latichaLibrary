@@ -100,10 +100,10 @@ if (isset($_POST['update'])) {
     
     // Update data postingan di database
     if($pass != ""){
-        $queryUpdate = "UPDATE anggota SET namaLengkap = '$nama', email = '$email',
+        $queryUpdate = "UPDATE anggota SET namaLengkap = '$nama', email = '$email'
         password = '$pass' WHERE anggota_id = $id";
     }else{
-        $queryUpdate = "UPDATE anggota SET namaLengkap = '$nama', email = '$email',
+        $queryUpdate = "UPDATE anggota SET namaLengkap = '$nama', email = '$email'
         WHERE anggota_id = $id";
     }
         

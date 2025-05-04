@@ -6,131 +6,131 @@ include 'config.php';
 session_start();
 
 // Mendapatkan ID pengguna dari sesi
-$userId = $ $_SESSION["anggota_id"];
+$userId = $_SESSION["anggota_id"];
 
 // Mendapatkan form untuk menambahkan postingan baru
 if (isset($_POST['simpan'])) {
-    // Mendapatkan data dari form
-    $postTitle = $_POST["post_title"]; // Judul postingan
-    $content = $_POST["content"]; // Konten postingan
-    $categoryId = $_POST["category_id"]; // ID kategori
+    $judulBuku = $_POST["judulBuku"];
+    $penulis = $_POST["penulis"];
+    $tahun_publikasi = $_POST["tahun_publikasi"];
+    $uploadOk = 1;
+    $targetDir = "uploads/";
 
-    // Mengatur direktori penyimpanan file gambar
-    $imageDir = "blog/assets/img/uploads/";
-    $imageName = $_FILES["image"]["name"]; // Nama file gambar
-    $imagePath = $imageDir . basename($imageName); // Path lengkap gambar
- 
-    // Memindahkan file gambar yang diunggah ke direktori tujuan
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath)) {
-        // Jika unggahan berhasil, masukkan
-        // data postingan ke dalam database
-        $query = "INSERT INTO posts (post_title, content, created_at, category_id, user_id, image_path) VALUES ('$postTitle', '$content', NOW(), $categoryId, ".$_SESSION['user_id'].", '$imagePath')";
+    // Ekstensi file
+    $fileName = $_FILES["sampul"]["name"];
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    // Nama file baru dengan timestamp
+    $newFileName = date("Ymd_His") . '.' . $fileExtension;
+    $targetFile = $targetDir . $newFileName;
+
+    // Upload file
+    if (move_uploaded_file($_FILES["sampul"]["tmp_name"], $targetFile)) {
+        // Masukkan ke database, sertakan nama file
+        $query = "INSERT INTO buku (judul_buku, penulis, tahun_publikasi, sampul)
+                  VALUES ('$judulBuku', '$penulis', '$tahun_publikasi', '$newFileName')";
         if ($conn->query($query) === TRUE) {
-            // Notifikasi berhasil jika postingan berhasil ditambahkan
             $_SESSION['notification'] = [
                 'type' => 'primary',
-                'message' => 'Post successfully added.'
+                'message' => 'Books successfully added.'
             ];
         } else {
-            // Notifikasi error jika gagal menambahkan postingan
             $_SESSION['notification'] = [
                 'type' => 'danger',
-                'message' => 'error adding post: ' . $conn->error
+                'message' => 'Database error: ' . $conn->error
             ];
         }
+
     } else {
-        // Notifikasi error jika unggahan gambar gagal
         $_SESSION['notification'] = [
             'type' => 'danger',
-            'message' => 'Failed to upload image.'
+            'message' => 'Failed to upload file.'
         ];
-        return;
     }
 
-    // Arahkan ke halaman dashboard setelah selesai
-    header('Location: dashboard.php');
+    header('Location: buku.php');
     exit();
 }
+
 
 // Proses penghapusan postingan
-if (isset($_POST['delete'])) {
-    // Mengambil ID post dari paramenter URL
-    $postID = $_POST['postID'];
+if (isset($_GET['id_buku'])) {
+    $booksID = $_GET['id_buku'];
 
-    // Query untuk menghapus post berdasarkan ID
-    $exec = mysqli_query($conn, "DELETE FROM posts WHERE id_post='$postID'");
+    // Ambil nama file terlebih dahulu
+    $result = mysqli_query($conn, "SELECT sampul FROM buku WHERE id_buku='$booksID'");
+    $row = mysqli_fetch_assoc($result);
+    if ($row) {
+        $filename = $row['sampul'];
+        $filepath = 'uploads/' . $filename;
 
-    // Menyimpan notifikasi kerberhasilan atau kegagalan ke dalam session
-    if ($exec) {
-        $_SESSION['notification'] = [
-            'type' => 'primary',
-            'message' => 'Post successfully deleted.'
-        ];
-    } else {
-        $_SESSION['notification'] = [
-            'type' => 'danger',
-            'message' => 'Error deleting post: ' . mysqli_error($conn)
-        ];
+        // Hapus file jika ada
+        if (file_exists($filepath)) {
+            unlink($filepath);
+        }
     }
 
-    // Redirect kembali ke dalam halaman dashboard
-    header('Location: dashboard.php');
+    // Hapus data dari DB
+    $exec = mysqli_query($conn, "DELETE FROM buku WHERE id_buku='$booksID'");
+    $_SESSION['notification'] = [
+        'type' => $exec ? 'primary' : 'danger',
+        'message' => $exec ? 'Books successfully deleted.' : 'Error deleting post: ' . mysqli_error($conn)
+    ];
+
+    header('Location: buku.php');
     exit();
 }
 
-// Menangani pembaruan data postingan
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
-    // Mendapatkan data dart form
-    $postId = $_POST['post_id'];
-    $postTitle = $_POST["post_title"];
-    $content = $_POST["content"];
-    $categoryId= $_POST["category_id"];
-    $imageDir = "assets/img/uploads/"; // Direktori penyimpanan gambar
 
-    // Periksa apakah file gambar baru diunggah
-    if (!empty($_FILES["image_path"]["name"])) {
-        $imageName = $_FILES["image_path"]["name"];
-        $imagePath = $imageDir. $imageName;
-        
-        // Pindahkan file baru ke direktori tujuan
-        move_uploaded_file($_FILES["image_path"]["tmp_name"], $imagePath);
-        
-        // Hapus gambar lama
-        $queryOldImage = "SELECT image_path FROM posts WHERE id_post = $postId";
-        $resultOldImage = $conn->query($queryOldImage);
-        if ($resultOldImage->num_rows > 0) {
-            $oldImage = $resultOldImage->fetch_assoc()['image_path'];
-            if (file_exists($oldImage)) {
-                unlink($oldImage); // Menghapus file lama
-            }
+// Menangani pembaruan data postingan
+if (isset($_POST['update'])) {
+    $id = $_POST['id_buku'];
+    $judul = $_POST["judul_buku"];
+    $penulis = $_POST["penulis"];
+    $tahun_publikasi = $_POST["tahun_publikasi"];
+
+    $updateQuery = "UPDATE buku SET judul_buku = '$judul', penulis = '$penulis', tahun_publikasi = '$tahun_publikasi'";
+
+    // Jika ada file baru
+    if (!empty($_FILES["sampul"]["name"])) {
+        // Ambil file lama
+        $res = mysqli_query($conn, "SELECT sampul FROM buku WHERE id_buku='$id'");
+        $old = mysqli_fetch_assoc($res);
+        if ($old && file_exists('uploads/' . $old['sampul'])) {
+            unlink('uploads/' . $old['sampul']);
         }
-    } else {
-        // Jika tidak ada file baru, gunakan gambar lama
-        $imagePathQuery = "SELECT image_path FROM posts WHERE id_post = $postId";
-        $result = $conn->query($imagePathQuery);
-        $imagePath = ($result->num_rows > 0) ? $result->fetch_assoc() ['image_path']: null;
+
+        // Simpan file baru
+        $fileExtension = strtolower(pathinfo($_FILES["sampul"]["name"], PATHINFO_EXTENSION));
+        $newFileName = date("Ymd_His") . '.' . $fileExtension;
+        $targetFile = "uploads/" . $newFileName;
+
+        if (move_uploaded_file($_FILES["sampul"]["tmp_name"], $targetFile)) {
+            $updateQuery .= ", sampul = '$newFileName'";
+        } else {
+            $_SESSION['notification'] = [
+                'type' => 'danger',
+                'message' => 'File upload failed.'
+            ];
+            header('Location: buku.php');
+            exit();
+        }
     }
-    
-    // Update data postingan di database
-    $queryUpdate = "UPDATE posts SET post_title = '$postTitle',
-        content = '$content', category_id = $categoryId,
-        image_path = '$imagePath' WHERE id_post = $postId";
-        
-    if ($conn->query($queryUpdate) === TRUE) {
-        // Notifikasi berhasil
+
+    $updateQuery .= " WHERE id_buku = $id";
+
+    if ($conn->query($updateQuery) === TRUE) {
         $_SESSION['notification'] = [
             'type' => 'primary',
             'message' => 'Postingan berhasil diperbarui.'
         ];
     } else {
-        // Notifikasi gagal
         $_SESSION['notification'] = [
             'type' => 'danger',
             'message' => 'Gagal memperbarui postingan.'
         ];
     }
 
-    // Arahkan ke halaman dashboard
-    header('Location: dashboard.php');
+    header('Location: buku.php');
     exit();
 }

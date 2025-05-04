@@ -9,6 +9,7 @@
         <span class="app-brand-text demo text-uppercase fw-bolder">LatichaLibrary</span>
       </a>
     </div>
+    
     <!-- /Logo -->
     <form action="register_process.php" class="mb-3" method="POST">
       <div class="mb-3">
